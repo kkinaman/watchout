@@ -4,12 +4,16 @@
     <link rel='stylesheet' type='text/css' href='styles.css'>
   </head>
   <body>
-    <div id='scores'>
-      <h3>High Score: <span id='best-score'></h3>
-      <h3>Current Score: <span id='current-score'></h3>
-      <h3>Collisions: <span id='collisions'></h3>
+    <div class="board">
+      <div class="board-header">
+        <h1>Collider</h1>
+      </div>
+      <div class="scores">
+        <h3>High Score: <span id='best-score'></h3>
+        <h3>Current Score: <span id='current-score'></h3>
+        <h3>Collisions: <span id='collisions'></h3>
+      </div>
     </div>
-    <div class="board"></div>
     <script src="lib/d3.js" charset="utf-8"></script>
     <script src='watchout.js'></script>
   </body>

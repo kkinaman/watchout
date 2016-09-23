@@ -1,6 +1,3 @@
-// start slingin' some d3 here.
-
-
 var gameOptions = {
   height: 450,
   width: 700,
@@ -13,20 +10,9 @@ var gameStats = {
   bestScore: 0
 };
 
-
 var gameBoard = d3.select('.board').append('svg')
                 .attr('width', gameOptions.width)
                 .attr('height', gameOptions.height);
-
-var updateScore = function() {
-  d3.select('#current-score').text(gameStats.score.toString());
-};
-
-var updateBestScore = function () {
-  gameStats.bestScore = Math.max(gameStats.bestScore, gameStats.score);
-  d3.select('#best-score').text(gameStats.bestScore.toString());
-};
-
 
 var Player = function () {
   this.fill = '#ff6600';
@@ -37,26 +23,21 @@ var Player = function () {
 };
 
 Player.prototype.render = function(gameBoard ) {
-  var el = gameBoard.append('circle')
+  gameBoard.append('circle')
           .attr('class', 'player')
-          //.attr('cx', function() { return this.x; })
-          //.attr('cy', function() { return this.y; })
           .attr('cx', this.x)
           .attr('cy', this.y)
           .attr('r', this.r )
           .attr('fill', this.fill);
 };
 
-var players = [];
-players.push(new Player(gameOptions).render(gameBoard));
-//players.push(new Player(gameOptions).render(gameBoard));
-
+// var players = [];
+// players.push(new Player(gameOptions).render(gameBoard));
 
 var Enemy = function(i) {
   this.id = i;
   this.x = Math.random() * gameOptions.width;
   this.y = Math.random() * gameOptions.height;
-
 };
 
 var createEnemies = function() {
@@ -65,39 +46,35 @@ var createEnemies = function() {
   });
 };
 
-var render = function ( enemies ) {
-  var enemiesOnBoard = gameBoard.selectAll('circle.enemy');
-  enemiesOnBoard.data(enemies, function(d) {
-    return d.id;
-  });
-  //setRandom(enemies);
-  enemiesOnBoard.enter().append('circle')
-    .attr('class', 'enemy')
-    .attr('cx', function(enemy) { return enemy.x; })
-    .attr('cy', function(enemy) { return enemy.y; })
-    .attr('r', 10);
+var renderEnemies = function (enemies) {
+  gameBoard.selectAll('circle.enemy')
+            .data(enemies, function(d) {
+              return d.id;
+            })
+            .enter().append('circle')
+            .attr('class', 'enemy')
+            .attr('cx', function(enemy) { return enemy.x; })
+            .attr('cy', function(enemy) { return enemy.y; })
+            .attr('r', 10);
 };
 
-var setRandom = function(enemies) {
-  enemies.attr('cx', function() { return Math.random() * gameOptions.width; } )
-        .attr('cy', function() { return Math.random() * gameOptions.height; } )
-        .transition().duration(2000);
+var updateEnemies = function() {
+  var enemies = gameBoard.selectAll('circle.enemy')
+        .transition().duration(2000)
+        .attr('cx', function() { return Math.random() * gameOptions.width; } )
+        .attr('cy', function() { return Math.random() * gameOptions.height; } );
 };
-
-var updateScreen = function(){
-  var circleEnemies = gameBoard.selectAll('circle.enemy');
-  setRandom(circleEnemies);
-};
-
-
 
 var play = function () {
   var gameTurn = function () {
-    updateScreen();
-    setInterval(gameTurn, 2000);
+    updateEnemies();
+    setTimeout(gameTurn, 2000);
   };
+
+  var player = new Player(gameOptions).render(gameBoard);
+  var svgPlayer = d3.select('.player");
   var enemies = createEnemies();
-  render(enemies);
+  renderEnemies(enemies);
   gameTurn();
 };
 

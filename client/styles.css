@@ -3,59 +3,47 @@
 /* Note: an asteroid image is included in this repo.
 Feel free to use it if you like. */
 
-/*
-body {
-    background: url(asteroid.png);
+
+/*body {
+  background: url(asteroid.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+}*/
+
+h1 {
+  margin-top: 10px;
 }
-*/
+h3 {
+  margin: 10px;
+}
+
 .board {
-    position: relative;
-    box-shadow: 0px 0px 10px rgba(0,0,0,1);
-    width: 700px;
-    background: white;
-    padding: 40px;
-    margin-top: 40px;
-    margin-bottom: 40px;
+  position: relative;
+  box-shadow: 0px 0px 10px #aaa;
+  width: 700px;
+  background: white;
+  padding: 40px;
+  margin: 40px auto;
+  background-color: #eee;
 }
 
-#score {
-    padding: 10px;
-    position: absolute;
-    top: 40px;
-    right: 40px;
-    background: #ddd;
-    text-align: right;
-    border-radius: 3px;
-  }
-
-#score span {
-    display: inline-block;
-    width: 50px;
+.board-header {
+  float: left;
 }
 
-.rule line {
-    stroke: #eee;
-    shape-rendering: crispEdges;
+svg {
+  background-color: #fff;
 }
 
-.rule line.axis {
-    stroke: #000;
-}
-
-.area {
-    fill: lightsteelblue;
-}
-
-.line, circle.area {
-    fill: none;
-    stroke: steelblue;
-    stroke-width: 1.5px;
+.scores {
+  padding: 10px;
+  margin-bottom: 20px;
+  background-color: #ccc;
+  float: right;
+  text-align: right;
+  line-height: 20px;
 }
 
 circle.area {
-    fill: #fff;
-}
-
-.enemy {
-    
+  fill: #fff;
 }
