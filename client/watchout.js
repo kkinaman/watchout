@@ -72,9 +72,19 @@ var play = function () {
   };
 
   var player = new Player(gameOptions).render(gameBoard);
-  var svgPlayer = d3.select('.player");
+
+  var drag = d3.behavior.drag().on('drag', function(player) {
+    var mouseCoords = d3.mouse(this);
+    d3.select('.player').transition().duration(0)
+                    .attr('cx', mouseCoords[0])
+                    .attr('cy', mouseCoords[1]);
+  });
+  gameBoard.call(drag);
+
   var enemies = createEnemies();
+
   renderEnemies(enemies);
+
   gameTurn();
 };
 
