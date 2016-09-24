@@ -37,6 +37,7 @@ var Enemy = function(i) {
   this.x = Math.random() * gameOptions.width;
   this.y = Math.random() * gameOptions.height;
   this.r = 10;
+  this.hasHit = false;
 };
 
 var createEnemies = function() {
@@ -63,13 +64,15 @@ var updateCollisions = function() {
  
 var updateBestScore = function() {
   if (gameStats.score >= gameStats.bestScore) {
-    gameStats.bestScore = gameStats.score;
+    var intNum = Math.floor(gameStats.score.toString());
+    gameStats.bestScore = intNum;
     d3.select('.best-score').text(gameStats.bestScore.toString());
   }
 };
 
 var updateScore = function() {
-  d3.select('.current-score').text(gameStats.score.toString());
+  var intNum = Math.floor(gameStats.score.toString());
+  d3.select('.current-score').text(intNum);
 };
 
 var checkCollision = function(enemy) {
@@ -79,11 +82,17 @@ var checkCollision = function(enemy) {
 
   var distance = Math.sqrt(Math.pow(xDiff, 2) + Math.pow(yDiff, 2));
   if (distance < radiusSum) {
-    updateCollisions();
+    if (!enemy.hasHit) {
+      updateCollisions();
+    }
+    enemy.hasHit = true;
     updateBestScore();
     gameStats.score = 0;
-    updateScore();
+  } else {
+    enemy.hasHit = false;
+    gameStats.score += 0.01;
   }
+  updateScore();
 };
 
 var updateEnemies = function() {

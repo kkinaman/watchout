@@ -44,6 +44,11 @@ svg {
   line-height: 20px;
 }
 
+span {
+  display: inline-block;
+  width: 50px;
+}
+
 circle.area {
   fill: #fff;
 }
