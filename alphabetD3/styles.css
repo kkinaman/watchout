@@ -1,0 +1,17 @@
+text {
+  font-size: 48px;
+  font-weight: bold;
+  font-family: monospace;
+}
+
+.enter {
+  fill: green;
+}
+
+.update {
+  fill: #333;
+}
+
+.exit {
+  fill: brown;
+}
