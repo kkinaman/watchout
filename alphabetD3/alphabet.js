@@ -24,23 +24,22 @@ var update = function(data) {
         .attr("class", "exit")
       .transition(t)
         .attr("y", 60)
-        .style("fill-opacity", 1e-6)
+        .style("fill-opacity", 0)
         .remove();
 
   //updated data
   text.attr('class', 'update')
         .attr("y", 0)
         .style("fill-opacity", 1)
-        .transition(t)
+      .transition(t)
         .attr("x", function(d, i) { return i * 40; });;
 
   //new data
   text.enter().append("text")
         .attr("class", "enter")
-        // .attr("dy", ".35em")
         .attr("y", -60)
         .attr("x", function(d, i) { return i * 40; })
-        .style("fill-opacity", 1e-6)
+        .style("fill-opacity", 0)
         .text(function(d) { return d; })
       .transition(t)
         .attr("y", 0)
